@@ -15,7 +15,7 @@ class CardStack extends StatelessWidget {
                 top: 10,
                 child: Card(
                     elevation: 10,
-                    color: Color.fromARGB(255, 240, 233, 230),
+                    color: Color.fromARGB(215, 210, 220, 210),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
@@ -48,7 +48,7 @@ class CardStack extends StatelessWidget {
                 top: 40,
                 child: Card(
                     elevation: 10,
-                    color: Color.fromARGB(255, 200, 0, 0),
+                    color: Color.fromARGB(200, 200, 0, 0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:provider/provider.dart';
 import '../shared_state/common.dart';
+import './card_stack.dart';
 
 class RandomWords extends StatefulWidget {
   @override
@@ -9,19 +10,16 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-  var _randomWordPairs;
+  var _randomWordPairs = [];
   final _savedWordPairs = Set<WordPair>();
 
   Widget build(BuildContext context) {
     final common = Provider.of<Common>(context);
-
-    _randomWordPairs = common.folders;
-    print('=============== folders');
-    print(common.folders);
+    int _cIndex = 0;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('WordPair Generator'),
+        title: Text('Food Diary'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.list),
@@ -30,6 +28,29 @@ class RandomWordsState extends State<RandomWords> {
         ],
       ),
       body: _buildList(),
+      // body: new Container(
+      //   height: 400.0,
+      //   alignment: Alignment.center,
+      //   child: new Column(children: <Widget>[CardStack(), _buildList()]),
+      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _cIndex,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home, color: Color.fromARGB(255, 0, 0, 0)),
+              title: new Text('Home')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.power, color: Color.fromARGB(255, 0, 0, 0)),
+              title: new Text('Power'))
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () => print('pressed'),
+        tooltip: 'Increment',
+        child: new Icon(Icons.add),
+      ),
     );
   }
 
@@ -39,7 +60,6 @@ class RandomWordsState extends State<RandomWords> {
       itemBuilder: (context, item) {
         if (item.isOdd) return Divider();
 
-        print(_randomWordPairs);
         final index = item ~/ 2;
 
         if (index >= _randomWordPairs.length) {
