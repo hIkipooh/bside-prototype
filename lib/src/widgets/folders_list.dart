@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:provider/provider.dart';
+import '../shared_state/common.dart';
 
 class RandomWords extends StatefulWidget {
   @override
@@ -7,8 +9,29 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-  final _randomWordPairs = <WordPair>[];
+  var _randomWordPairs;
   final _savedWordPairs = Set<WordPair>();
+
+  Widget build(BuildContext context) {
+    final common = Provider.of<Common>(context);
+
+    _randomWordPairs = common.folders;
+    print('=============== folders');
+    print(common.folders);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('WordPair Generator'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: _pushSaved,
+          )
+        ],
+      ),
+      body: _buildList(),
+    );
+  }
 
   Widget _buildList() {
     return ListView.builder(
@@ -16,6 +39,7 @@ class RandomWordsState extends State<RandomWords> {
       itemBuilder: (context, item) {
         if (item.isOdd) return Divider();
 
+        print(_randomWordPairs);
         final index = item ~/ 2;
 
         if (index >= _randomWordPairs.length) {
@@ -68,20 +92,5 @@ class RandomWordsState extends State<RandomWords> {
         );
       },
     ));
-  }
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('WordPair Generator'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.list),
-            onPressed: _pushSaved,
-          )
-        ],
-      ),
-      body: _buildList(),
-    );
   }
 }

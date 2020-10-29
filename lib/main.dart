@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'src/widgets/folders_list.dart';
+import 'src/widgets/card_stack.dart';
 import 'package:provider/provider.dart';
-import 'src/shared_state/folders.dart';
+import 'src/shared_state/folder.dart';
 import 'src/shared_state/common.dart';
 
 void main() => runApp(MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           theme: ThemeData(primaryColor: Colors.purple[900]),
-          home: RandomWords()),
+          // home: RandomWords()),
+          home: CardStack()),
     );
   }
 }
